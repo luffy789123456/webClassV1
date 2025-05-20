@@ -8,3 +8,7 @@ Only HTML, CSS, and JavaScript
 
 send mail menggunakan web 
 https://formspree.io/
+
+
+Link Website
+https://webclassv1.netlify.app/

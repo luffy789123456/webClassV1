@@ -43,7 +43,7 @@
 // window.addEventListener("load", function () {
 //   setTimeout(() => {
 //       document.getElementById("preloader").style.opacity = "0";
-      
+
 //           document.getElementById("preloader").style.display = "none";
 
 //           document.querySelectorAll(".animated").forEach(el => {
@@ -56,8 +56,8 @@
 // });
 
 // Marquee effect
-const marquee = document.getElementById('marquee');
-const content = document.getElementById('marquee-content');
+const marquee = document.getElementById("marquee");
+const content = document.getElementById("marquee-content");
 
 // Duplikat isi hingga cukup panjang
 while (marquee.scrollWidth < window.innerWidth * 2) {
@@ -66,52 +66,12 @@ while (marquee.scrollWidth < window.innerWidth * 2) {
 }
 
 // Pause/resume saat hover
-marquee.addEventListener('mouseenter', () => {
-  marquee.classList.add('paused');
+marquee.addEventListener("mouseenter", () => {
+  marquee.classList.add("paused");
 });
 
-marquee.addEventListener('mouseleave', () => {
-  marquee.classList.remove('paused');
-});
-
-// bg-musik
-document.addEventListener("DOMContentLoaded", function() {
-  const players = document.querySelectorAll(".player");
-
-  players.forEach(function(player) {
-    const audio = player.querySelector(".audio");
-    const playPause = player.querySelector(".playPause");
-    const progress = player.querySelector(".progress");
-
-    // Play/Pause button
-    playPause.addEventListener("click", function() {
-      if (audio.paused) {
-        // Pause all other audios
-        document.querySelectorAll("audio").forEach(function(otherAudio) {
-          if (otherAudio !== audio) {
-            otherAudio.pause();
-            otherAudio.closest(".player").querySelector(".playPause").innerHTML = "&#9658;";
-          }
-        });
-
-        audio.play();
-        playPause.innerHTML = "&#10074;&#10074;"; // Pause icon
-      } else {
-        audio.pause();
-        playPause.innerHTML = "&#9658;"; // Play icon
-      }
-    });
-
-    // Progress bar update
-    audio.addEventListener("timeupdate", function() {
-      progress.value = (audio.currentTime / audio.duration) * 100;
-    });
-
-    // Seek in audio
-    progress.addEventListener("input", function() {
-      audio.currentTime = (progress.value / 100) * audio.duration;
-    });
-  });
+marquee.addEventListener("mouseleave", () => {
+  marquee.classList.remove("paused");
 });
 
 // Scroll up
@@ -137,4 +97,56 @@ window.addEventListener("scroll", () => {
   }
 
   lastScrollTop = scrollTop;
+});
+
+// gsap
+document.addEventListener("DOMContentLoaded", (event) => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const animationStart = () => {
+    return gsap
+      .timeline()
+      .to("marquee1", {
+        opacity: 0,
+        y: "-2rem",
+        scale: 1,
+      })
+      .to(
+        "#name1",
+        {
+          scale: 0.4,
+          y: "2rem",
+          x: "200%",
+        },
+        "-=0.5"
+      )
+      .to(
+        "#name2",
+        {
+          scale: 3,
+          y: "2rem",
+        },
+        "-=0.5"
+      )
+      .to(
+        "#name3",
+        {
+          scale: 0.4,
+          y: "2rem",
+          x: "-200%",
+        },
+        "-=0.5"
+      );
+  };
+
+  let masterTi = gsap.timeline({
+    scrollTrigger: {
+      trigger: "member-class", // ⬅️ Tambahkan trigger yang sesuai
+      end: "+=1080 0px",
+      scrub: true,
+      pin: "member-class",
+    },
+  });
+
+  masterTi.add(animationStart());
 });

@@ -3,7 +3,7 @@ const songs = [
       title: "People",
       artist: "Libianca",
       src: "/audio/Libianca - People (Lyrics).mp3",
-      cover: "/image/artworks-Ffj8O8nSg6EyNc2w-pIcx0Q-t500x500.jpg",
+      cover: "./image/artworks-Ffj8O8nSg6EyNc2w-pIcx0Q-t500x500.jpg",
       lyrics: [
         { time: 0, text: "" },
         { time: 5, text: "Oh-oh, mm, mm" },
